@@ -1,0 +1,31 @@
+name: Deploy Report to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # adjust this to match your repository's main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Generate Report
+      run: |
+        # Command(s) to generate your report
+        # For example:
+        # npm install  # if using npm
+        # npm run build  # if your report requires build step
+        # ./generate_report.sh  # if you have a script to generate the report
+        ./DCM_Deploy_Report_2.sh
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "tekale-v"
+        git config --global user.email "actions@users.noreply.github.com"
+        git add .
+        git commit -m "Update report [skip ci]"
+        git push
