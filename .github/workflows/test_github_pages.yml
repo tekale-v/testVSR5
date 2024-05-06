@@ -37,8 +37,6 @@ jobs:
     - name: Push changes
       run: |
         cd /home/runner/work/testVSR5/testVSR5/docs/
-        git add .
-        git commit -m "Automated commit"
-        git push
+        gh repo list
       env:
           GH_TOKEN: ${{ secrets.PAGE_REPO_ACCESS }}
