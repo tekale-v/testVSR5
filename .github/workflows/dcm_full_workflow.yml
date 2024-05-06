@@ -1,0 +1,242 @@
+name: DCM Full Workflow
+
+on: 
+  workflow_dispatch:
+    inputs:
+      Environment:
+        description: 'Environment'
+        required: true
+        default: 'PLATFORM_SBX'
+        type: choice
+        options:
+          - PLATFORM_SBX
+          - AGILE_SIT
+          - SIT
+          - QA
+      Branch:
+        description: 'Branch'
+        required: true
+        default: 'develop-dcm-june-2024'
+        type: choice
+        options:
+          - develop-dcm-june-2024
+          - release-2022x-05
+      Build:
+        description: 'Build'
+        required: false
+        type: boolean
+      Deploy:
+        description: 'Deploy'
+        required: false
+        type: boolean
+      DeployType:
+        description: 'DeployType'
+        default: 'Enovia,Widget'
+        type: choice
+        options:
+          - Enovia
+          - Widget
+          - Enovia,Widget
+
+env:
+  REPO_NONPROD_DIR: ${{ vars.ARTIFACTORY_REPO_NONPROD_DIR }}
+  REPO_PROD_DIR: ${{ vars.ARTIFACTORY_REPO_PROD_DIR }}
+  REPO_OOTB_BRANCH: ${{ vars.OOTB_ARTIFACT }}
+  REPO_APPS_BRANCH: ${{ vars.APPS_ARTIFACT }}
+  RELEASE_TARGET:  ${{ inputs.Branch }}
+  
+jobs:
+  preChecks:
+    name: ${{ inputs.Environment }} PreChecks
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.Environment }}
+    permissions: write-all
+    outputs:
+      app1server_: ${{ steps.InputData.outputs.app1server }}
+      widgetserver_: ${{ steps.InputData.outputs.widgetserver }}
+      app1jvms_: ${{ steps.InputData.outputs.app1jvms }}
+      reponame_: ${{ steps.InputData.outputs.reponame}}
+      app1task_: ${{ steps.InputData.outputs.app1task }}
+      widgettask_: ${{ steps.InputData.outputs.widgettask }}
+    steps:
+      - name: InputData
+        id: InputData
+        run: |
+             echo " Environment         -> ${{ github.event.inputs.Environment }} "
+             echo " Branch              -> ${{ github.event.inputs.Branch }} "
+             echo " Is Build Selected ? -> ${{ github.event.inputs.Build }} "
+             echo " Is Deploy Selected ?-> ${{ github.event.inputs.Deploy }} "
+             echo " Deployment type     -> ${{ github.event.inputs.DeployType }} " 
+             echo "App Server -> ${{ vars.APP_SERVER1 }} "
+             echo "app1server=${{ vars.APP_SERVER1 }}" >> "$GITHUB_OUTPUT"
+             echo "widgetserver=${{ vars.WIDGET_SERVER }}" >> "$GITHUB_OUTPUT"
+             echo "app1jvms=${{ vars.APP_SERVER1_3DS_JVMS }}" >> "$GITHUB_OUTPUT"
+             echo "Done"
+             echo "reponame=`basename ${{ github.repository }}`" >> $GITHUB_OUTPUT
+             echo "app1task=${{ vars.APP_SERVER1_TASK }}" >> "$GITHUB_OUTPUT"
+             echo "widgettask=${{ vars.WIDGET_SERVER_TASK }}" >> "$GITHUB_OUTPUT"
+             
+             
+
+  Build:
+    runs-on: ${{needs.preChecks.outputs.app1server_ }}
+    needs: preChecks
+    steps:
+    - name: Checking out code
+      if: ${{ inputs.Build }}
+      uses: actions/checkout@v4
+      with:
+        repository: procter-gamble/plm-3dx
+        ref: ${{ github.event.inputs.Branch }}
+        token: ${{ secrets.PLM3DXSMATOKEN }}
+        
+    - name: Jfrog connectivity
+      id: artifacts
+      uses: jfrog/setup-jfrog-cli@v4
+      env:
+        JF_URL: ${{ vars.ARTIFACTORY_URL }}
+        JF_ACCESS_TOKEN: ${{ secrets.SMAJFROGTOKEN }} 
+    - name: Build Selected ?
+      if: ${{ !inputs.Build }}
+      run: |
+           echo "INFO !! Skipping BUILD since not selected" 
+           echo "Repo Name ->  ${{needs.preChecks.outputs.reponame_ }}  "
+    - name: OOTB Artifact
+      id: ootb_artifact
+      if: ${{ inputs.Build }}
+      run: |
+            config_path=$(jf rt search "$REPO_PROD_DIR/PLM-3DX-OOTB/origin/$REPO_OOTB_BRANCH/" --recursive=false --include-dirs --sort-by=created --sort-order=desc --limit=1)
+            echo "ootb artifact path = $config_path"
+            plm_3dx_path=$(echo "$config_path" | jq -r '.[0].path')
+            echo "3DEXPERIENCE Configuration path = $plm_3dx_path"
+            echo "PLM_3DEXPERIENCE_PATH=$plm_3dx_path" >> $GITHUB_OUTPUT
+    - name: Apps Artifacts
+      id: apps_artifact
+      if: ${{ inputs.Build }}
+      run: |
+            apps_dependency=$(jf rt search "$REPO_PROD_DIR/PLM-3DX-APPS/origin/$REPO_APPS_BRANCH/" --recursive=false --include-dirs --sort-by=created --sort-order=desc --limit=1)
+            echo "apps artifact path = $apps_dependency"
+            apps_path=$(echo "$apps_dependency" | jq -r '.[0].path')
+            echo "Apps dependencies repository path = $apps_path"
+            echo "APPS_3DEXPERIENCE_PATH=$apps_path" >> $GITHUB_OUTPUT
+    - name: Download OOTB and Apps Artifacts
+      if: ${{ inputs.Build }}
+      run: |
+            jf rt download "${{ steps.ootb_artifact.outputs.PLM_3DEXPERIENCE_PATH }}/" "_OOTBArtifacts/dist/" --flat
+            jf rt download "${{ steps.apps_artifact.outputs.APPS_3DEXPERIENCE_PATH }}/" "_AppsArtifacts/dist/" --flat
+    #/opt/matrix/jenkins/build/tools/hudson.plugins.gradle.GradleInstallation/gradle692/bin/gradle cleanWorkFolder initTasks autobuild compileJava build dhDeployment -b
+    - name: Build step
+      if: ${{ inputs.Build }}
+      run: |
+          /opt/matrix/jenkins/build/tools/hudson.plugins.gradle.GradleInstallation/gradle692/bin/gradle cleanWorkFolder initTasks autobuild compileJava build dhDeployment -b build.gradle --project-cache-dir /opt/matrix/tmp/gradleCacheDir_FullBuild      
+          echo "Build is successful."
+    - name: Publish to Artifactory
+      if: ${{ inputs.Build }}
+      run: |
+           jf rt upload "_artifacts/*" "$REPO_NONPROD_DIR/${{needs.preChecks.outputs.reponame_}}/origin/$RELEASE_TARGET/build-${{ github.run_number }}/" --build-name "${{ runner.os }}-${{ runner.arch }}-${{ runner.name }}" --build-number "${{ github.run_number }}" --module "3DEXPERIENCE" --exclusions "**/JPOs/*" --flat
+  Deploy_Enovia:
+    # check if deploy selected from UI
+    # Download artifacts
+    # run gradle
+    runs-on: ${{needs.preChecks.outputs.app1server_ }}
+    needs: [Build, preChecks]
+    env:
+      ENOVIA_JVMS: ${{ needs.preChecks.outputs.app1jvms_ }}
+    steps: 
+      - name: Sleep for 20 secs
+        uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '10' # for 60 seconds
+      - name: Jfrog connectivity
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ vars.ARTIFACTORY_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.SMAJFROGTOKEN }}
+      - name: Deploy Selected ?
+        if: ${{ inputs.Deploy && contains(inputs.DeployType, 'Enovia')}}         
+        run: |
+             echo " INFO !! SKIPPING DEPLOYMENT SINCE NOT SELECTED"
+      
+      - name: Shutdown Enovia JVM
+        if: ${{ inputs.Deploy && contains(inputs.DeployType, 'Enovia')}}         
+        run: |
+             echo "JVM Name ->  $ENOVIA_JVMS "
+             cd /opt/matrix/ant/PlatformScripts
+             BUILD_ID=dontKillMe sudo su - weblogic -c "/opt/matrix/ant/PlatformScripts/terminateJvmWrapper.sh $ENOVIA_JVMS"
+             ps -ef | grep -i $ENOVIA_JVMS | wc -l
+        
+      - name: Download Artifacts and run deploy
+        id: plm_artifact    
+        if: ${{ inputs.Deploy && contains(inputs.DeployType, 'Enovia')}}         
+        run: |
+             echo  ${{inputs.Deploy }}  
+             plm_artifacts=$(jf rt search "$REPO_NONPROD_DIR/${{needs.preChecks.outputs.reponame_ }}/origin/$RELEASE_TARGET/build*" --recursive=false --include-dirs --sort-by=created --sort-order=desc --limit=1)
+             echo $plm_artifacts
+             plm_path=$(echo "$plm_artifacts" | jq -r '.[0].path')
+             echo $plm_path
+             echo "Apps dependencies repository path = $plm_path"
+             echo "PLM_3DX_PATH=$plm_path" >> $GITHUB_OUTPUT
+             echo "final path... $plm_path/"
+             jf rt download "$plm_path/" "_artifacts/" --flat
+             echo "current dir..."
+             pwd
+             rm -rf settings.gradle
+             export INSTALL_DEV_SCHEMA=T
+             export DEPLOY_ENOVIACTRLM_APP=T
+             export INSTALL_POST_SCRIPTS=T
+             cp _artifacts/deploy.gradle _artifacts/JarsFile.txt .            
+             /opt/matrix/jenkins/build/tools/hudson.plugins.gradle.GradleInstallation/gradle692/bin/gradle ${{needs.preChecks.outputs.app1task_ }} -b deploy.gradle -Pvalidatemd5=true -Penvironmentname=${{inputs.Environment}}
+        
+      - name: Startup Enovia JVM
+        if: ${{ inputs.Deploy && contains(inputs.DeployType, 'Enovia')}}         
+        run: |
+             echo "About to restart JVMS...  $ENOVIA_JVMS "
+             cd /opt/matrix/ant/PlatformScripts
+             BUILD_ID=dontKillMe sudo su - weblogic -c "/opt/matrix/ant/PlatformScripts/Startup_2018xJVMs.sh $ENOVIA_JVMS"
+             ps -ef | grep -i $ENOVIA_JVMS | wc -l 
+
+  Deploy_Widget:
+    runs-on: ${{needs.preChecks.outputs.widgetserver_ }}
+    needs: [Deploy_Enovia, preChecks]
+    steps: 
+      - name: Jfrog connectivity
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ vars.ARTIFACTORY_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.SMAJFROGTOKEN }}    
+      - name: 
+        id: plm_artifact    
+        if: ${{ inputs.Deploy && contains(inputs.DeployType, 'Widget')}}         
+        run: |
+             echo  ${{inputs.Deploy }}  
+             plm_artifacts=$(jf rt search "$REPO_NONPROD_DIR/${{needs.preChecks.outputs.reponame_ }}/origin/$RELEASE_TARGET/build*" --recursive=false --include-dirs --sort-by=created --sort-order=desc --limit=1)
+             echo $plm_artifacts
+             plm_path=$(echo "$plm_artifacts" | jq -r '.[0].path')
+             echo $plm_path
+             echo "Apps dependencies repository path = $plm_path"
+             echo "PLM_3DX_PATH=$plm_path" >> $GITHUB_OUTPUT
+             echo "final path... $plm_path/"
+             jf rt download "$plm_path/" "_artifacts/" --flat
+             echo "current dir..."
+             pwd
+             rm -rf settings.gradle
+             cp _artifacts/deploy.gradle .
+             /opt/matrix/jenkins/build/tools/hudson.plugins.gradle.GradleInstallation/gradle692/bin/gradle ${{needs.preChecks.outputs.widgettask_ }} -b deploy.gradle -Pvalidatemd5=true -Penvironmentname=${{inputs.Environment}}
+    
+  GenerateReport:
+    runs-on:  ${{needs.preChecks.outputs.app1server_ }}
+    needs: [Deploy_Widget, preChecks]
+    steps: 
+       # Add a new step to call the shell script for report generation
+      - name: Checking out code
+        uses: actions/checkout@v4
+        with:
+            repository: procter-gamble/plm-3dx-devops
+            ref: main
+            token: ${{ secrets.PLM3DXSMATOKEN }}
+      - name: Generate Report
+        run: | 
+             pwd
+             chmod 755 BuildFiles/ReportGeneration/AgileReportGeneration.sh
+             cd BuildFiles/ReportGeneration
+             ./AgileReportGeneration.sh
