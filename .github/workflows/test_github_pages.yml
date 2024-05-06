@@ -37,8 +37,8 @@ jobs:
     - name: Push changes
       run: |
         cd /home/runner/work/testVSR5/testVSR5/docs/
-        git config user.email "Vaidehi.TEKALE@3ds.com"
-        git config user.name "tekale-v"
         git add .
         git commit -m "Automated commit"
         git push
+      env:
+          GH_TOKEN: ${{ secrets.PAGE_REPO_ACCESS }}
