@@ -30,7 +30,7 @@ jobs:
     - name: Make changes
       run: |
         # Perform any necessary changes in the source directory
-        cd /testVSR5/docs/
+        cd /home/runner/work/testVSR5/testVSR5/docs/
         # Example: echo "New content" > file.txt
         
     # Runs a set of commands using the runners shell
