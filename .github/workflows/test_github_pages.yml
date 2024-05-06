@@ -37,8 +37,8 @@ jobs:
     - name: Push changes
       run: |
         cd /home/runner/work/testVSR5/testVSR5/docs/
-        git config --global user.email "Vaidehi.TEKALE@3ds.com"
-        git config --global user.name "tekale-v"
+        git config user.email "Vaidehi.TEKALE@3ds.com"
+        git config user.name "tekale-v"
         git add .
         git commit -m "Automated commit"
         git push
