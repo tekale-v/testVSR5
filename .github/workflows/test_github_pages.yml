@@ -31,10 +31,10 @@ jobs:
       run: |
         # Perform any necessary changes in the source directory
         cd /home/runner/work/testVSR5/testVSR5/docs/
-        # Example: echo "New content" > file.txt
+        echo "New content" > file.txt
         
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Push changes
       run: |
         git config --global user.name "tekale-v"
         git add .
