@@ -304,6 +304,5 @@ date_time=$(date +"%m-%d-%Y %I:%M:%S %p %Z")
 mail_body="Please find attached the report for DCM build deployed on Platform Sandbox from plm-3dx Repo on at $date_time."
 
 echo "$mail_body" | mailx -s 'Platform Sandbox Deployment Report for Sprint12 ' -c "$cc_recipients" -a "$report_file"  -S smtp="smtp://127.0.0.1" -S from="$from_email" "$to_recipient"
-rm "$report_file"
 echo "Deployed PR report generated"
 
