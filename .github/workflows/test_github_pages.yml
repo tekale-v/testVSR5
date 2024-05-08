@@ -35,7 +35,7 @@ jobs:
         </head>
         <body>
         <h1>Hello, World!</h1>
-        <p>This is a content page.</p>
+        <p>This is a main content page.</p>
         </body>
         </html>"
 
