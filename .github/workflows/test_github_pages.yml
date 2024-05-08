@@ -24,19 +24,12 @@ jobs:
         repository: tekale-v/testVSR5  # replace with the source repository
         ref: github-pages  # adjust branch name as needed
         
-    - name: print current directory
-      run:
-          pwd
     - name: Make changes
       run: |
         # Perform any necessary changes in the source directory
         cd /home/runner/work/testVSR5/testVSR5/docs/
         echo "New content" > file.txt
-        
-    # Runs a set of commands using the runners shell
-    - name: git config listing
-      run: |
-        git config --list
+
     # Runs a set of commands using the runners shell
     - name: Push changes
       run: |
