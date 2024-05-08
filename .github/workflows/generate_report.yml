@@ -4,24 +4,48 @@ on:
   push:
     branches:
       - main  # adjust this to match your repository's main branch
-
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy:
+
+  # This workflow contains a single job called "build"
+  Generate-Report:
+
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Checkout code
+    - name: Checkout source code
       uses: actions/checkout@v2
+      with:
+        repository: tekale-v/testVSR5  # replace with the source repository
+        ref: github-pages  # adjust branch name as needed
+       # Add a new step to call the shell script for report generation
 
     - name: Generate Report
-      run: |
-        # Command(s) to generate your report
-        # For example:
-        # npm install  # if using npm
-        # npm run build  # if your report requires build step
-        # ./generate_report.sh  # if you have a script to generate the report
-        ./DCM_Deploy_Report_2.sh
+      run: | 
+           pwd
+           chmod 755 BuildFiles/ReportGeneration/AgileReportGeneration.sh
+           cd BuildFiles/ReportGeneration
+           ./AgileReportGeneration.sh
 
-    - name: Commit and Push changes
-      run: |
-                 
+  Push-Report:
+
+    # The type of runner that the job will run on
+      runs-on: ubuntu-latest
+      
+    # The permission to push into repo     
+      permissions:
+        contents: write
+        
+    # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+      - name: Push changes
+        run: |
+          git config user.name "tekale-v"
+          git config user.email "81675926+tekale-v@users.noreply.github.com"
+          git add .
+          git commit -m "Update report [skip ci]"
+          git push
+
+        
