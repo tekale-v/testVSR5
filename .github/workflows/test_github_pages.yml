@@ -31,11 +31,11 @@ jobs:
         # Define the content to be included in the HTML file
         content="<html>
         <head>
-        <title>Generated HTML</title>
+        <title>Content Page</title>
         </head>
         <body>
         <h1>Hello, World!</h1>
-        <p>This is a generated HTML file.</p>
+        <p>This is a content page.</p>
         </body>
         </html>"
 
