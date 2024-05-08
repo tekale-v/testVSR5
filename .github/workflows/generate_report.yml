@@ -3,7 +3,7 @@ name: Generate and Deploy Report to github Pages
 on:
   push:
     branches:
-      - main  # adjust this to match your repository's main branch
+      - github-pages  # adjust this to match your repository's main branch
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: tekale-v/testVSR5  # replace with the source repository
-        ref: main  # adjust branch name as needed
+        ref: github-pages  # adjust branch name as needed
       
       # Add a new step to call the shell script for report generation
     - name: Generate Report
@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: tekale-v/testVSR5  # replace with the source repository
-          ref: main  # adjust branch name as needed
+          ref: github-pages  # adjust branch name as needed
         
       - name: Push changes
         run: |
