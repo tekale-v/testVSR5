@@ -15,13 +15,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    
     - name: Checkout source code
       uses: actions/checkout@v2
       with:
         repository: tekale-v/testVSR5  # replace with the source repository
-        ref: github-pages  # adjust branch name as needed
-       # Add a new step to call the shell script for report generation
-
+        ref: main  # adjust branch name as needed
+      
+      # Add a new step to call the shell script for report generation
     - name: Generate Report
       run: | 
            pwd
@@ -40,6 +41,13 @@ jobs:
         
     # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
+      
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          repository: tekale-v/testVSR5  # replace with the source repository
+          ref: main  # adjust branch name as needed
+        
       - name: Push changes
         run: |
           git config user.name "tekale-v"
