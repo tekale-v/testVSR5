@@ -1,10 +1,10 @@
 state=merged
 base=develop-dcm-june-2024
 applicationName=DCM
-releaseName=Sprint12
 repoName=procter-gamble/plm-3dx
-date_to_compare=2024-04-23
 serverName=Platform_Sandbox
-SendMailTo=vsr5@3ds.com,mke26@3ds.com
-SendMailCC=mgh4@3ds.com
+SendMailTo=Srinivasarao.MEDAM@3ds.com,Nisha.PATEL@3ds.com
+SendMailCC=vsr5@3ds.com,mgh4@3ds.com,sma25@3ds.com,xgz@3ds.com
 from_email=plmadmin.im@pg.com
+releaseName=Sprint12
+date_to_compare=2024-04-23

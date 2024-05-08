@@ -131,7 +131,6 @@ generate_table_row() {
    
    #Conveting the Merged time to EST
 	est_time=$(date -d "$pr_mergedAt" +"%Y-%m-%d %H:%M:%S %Z")
-
     echo "<tr>"
     #echo "<td><a title=$pr_number href=$pr_url></a>"
 	echo "<td><a href=\"$pr_url\" target='_blank'>$pr_number</a></td>"
@@ -140,6 +139,7 @@ generate_table_row() {
    # echo "<td>$pr_description</td>"
 	echo "<td><button class='collapsible-button' onclick='toggleCollapsible($pr_number)' id='prDesc_$pr_number'>PR Description</button><div class='collapsible-content' id='collapsibleContent$pr_number'><p>$pr_description</p></div></td>"
 
+	IFS=$'\n' # Set the Internal Field Separator to newline	
 	td_files="<td><button class='toggle-button' onclick='toggleList($pr_number)' id=$pr_number>Files</button><ul class='expanded-list' id='expandable-list$pr_number'>"
     for file_name in $files_changed; do
         td_files="$td_files<li>$file_name</li>"
@@ -151,11 +151,9 @@ generate_table_row() {
 	echo "<td>$est_time</td>"
 	echo "</tr>"
 }
-
 declare -A grouped_files
 # Function to generate HTML table row for PR
 generate_consolidated_file() {
-
 cat <<EOF
 <script>
 function togglefolder(foldername) {
@@ -173,7 +171,7 @@ function togglefolder(foldername) {
 EOF
     # Receive array as an argument
     consolidated_files_array=("$@")
-	
+	IFS=$'\n' # Set the Internal Field Separator to newline	
 	# Iterate over the file paths
 	for file_path in "${consolidated_files_array[@]}"; do
 		# Extract the first folder name
@@ -181,16 +179,15 @@ EOF
 		# Add the file path to the corresponding group in the associative array
 		if [[ "$first_folder" == "WebWidget" || "$first_folder" == "WebWidgetSourceFiles" ]]; then
 			# Append the file path to the merged array
-			grouped_files[WebWidget]+="$file_path "
+			grouped_files[WebWidget]+="$file_path"$'\n'
 		else 
 			if [[ -z ${grouped_files[$first_folder]} ]]; then
-				grouped_files[$first_folder]=$file_path
+				grouped_files[$first_folder]="$file_path"
 			else
-				grouped_files[$first_folder]+=" $file_path"
+				grouped_files[$first_folder]+=$'\n'"$file_path"
 			fi
 		fi
 	done	
-
 	echo "<html>"
 	echo "<body>"
 	echo "<h2>Consolidated File List</h2>"
@@ -198,12 +195,12 @@ EOF
     echo "<tr>"
     echo "<th>Files</th>"
     echo "</tr>"
-
 	for folder_name in "${!grouped_files[@]}"; do
 		echo "<tr>"
 		echo "<td><button class='toggle-button' onclick='togglefolder(\"$folder_name\")' id='$folder_name'>$folder_name</button></td>"
         echo "<td>"
         echo "<ul class='expanded-list' id='expandable-list$folder_name'>"
+		IFS=$'\n' # Set the Internal Field Separator to newline	
         for file_name in ${grouped_files[$folder_name]}; do
             echo "<li>$file_name</li>"
         done
@@ -211,13 +208,10 @@ EOF
         echo "</td>"
 		echo "</tr>"
 	done
-    
 	echo "</table>"
     echo "</body>"
     echo "</html>"
 }
-
-
 
 # Function to generate HTML report
 generate_report() {
@@ -235,7 +229,6 @@ generate_report() {
     
 	# Initialize associative array to store unique changed files
 	declare -A unique_changed_files
-
 	# Get merged PRs
 	pr_list_output=$(gh pr list --repo $repoName --state=$stateValue  --base=$baseValue --json number,title,url,author,mergedAt,body)
 
@@ -275,25 +268,21 @@ generate_report() {
 			# Get files changed in the PR
 			files_changed=$(gh pr diff --repo $repoName "$pr_number" --name-only)
 			
+			IFS=$'\n' # Set the Internal Field Separator to newline	
 			# Loop through changed files
 			for file in $files_changed; do
 				# Add file to associative array
 				unique_changed_files["$file"]=1
 			done
-			
-			
 			generate_table_row "$pr_number" "$pr_url" "$pr_mergedAt" "$pr_title" "$files_changed" "$pr_author" "$substring"
 		fi
 	done
 
     generate_footer
-	
 	# Get the list of unique changed files (keys of the associative array)
 	consolidated_files=$(printf "%s\n" "${!unique_changed_files[@]}" | sort -u)
 	mapfile -t consolidated_files_array <<< "$consolidated_files"
 	generate_consolidated_file "${consolidated_files_array[@]}"
-	
-	
 }
 
 
