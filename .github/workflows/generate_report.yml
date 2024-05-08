@@ -25,9 +25,9 @@ jobs:
       with:
         #repository: tekale-v/testVSR5  # replace with the source repository
         #ref: github-pages  # adjust branch name as needed
-        repository: procter-gamble/plm-3dx-devops
+        repository: mangesh-khaire/github-actions-pages
         ref: main
-        token: ${{ secrets.PLM3DXSMATOKEN }}
+        token: ${{ secrets.PAGE_REPO_ACCESS }}
         
       # Add a new step to call the shell script for report generation
     - name: Generate Report
