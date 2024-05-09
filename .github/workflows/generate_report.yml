@@ -3,6 +3,15 @@ name: Generate and Deploy Report to github Pages
 on:
 
   workflow_dispatch:  
+    inputs:
+      Branch:
+          description: 'Branch'
+          required: true
+          default: github-pages
+          type: choice
+          options:
+            - github-pages
+            - main
   push:
     branches:
       - github-pages  # adjust this to match your repository's main branch
