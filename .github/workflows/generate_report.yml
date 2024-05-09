@@ -7,14 +7,12 @@ on:
       Branch:
           description: 'Branch'
           required: true
-          default: github-pages
+          default: 'github-pages'
           type: choice
           options:
             - github-pages
             - main
-  push:
-    branches:
-      - github-pages  # adjust this to match your repository's main branch
+ 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
