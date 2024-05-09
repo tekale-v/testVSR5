@@ -29,7 +29,7 @@ fs.readdir(directory, (err, files) => {
     const tableRows = htmlFiles.map(file => {
         const stats = fs.statSync(path.join(directory, file));
         const creationDate = stats.birthtime.toLocaleString(); // Format creation date
-        return `<tr><td>${creationDate}</td><td><a href="./testVSR5/reports/${file}">${file}</a></td></tr>`;
+        return `<tr><td>${creationDate}</td><td><a href="./reports/${file}">${file}</a></td></tr>`;
     });
 
     // Generate index.html content
