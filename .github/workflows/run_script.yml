@@ -24,7 +24,7 @@ jobs:
     - name: Run Script
       run: |
         cd ./docs/
-        node generateReport.js
+        node generate-report.js
         
     - name: Run Script
       run: |
