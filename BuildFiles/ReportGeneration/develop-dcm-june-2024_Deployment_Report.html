@@ -222,3 +222,115 @@ function togglefolder(foldername) {
     }
 }
 </script>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+		 /* Style for the collapsible content */
+		.collapsible-content {
+			display: none; /* Initially hidden */
+			overflow: hidden; /* Hide overflowing content */
+		}
+
+		/* Style for the collapsible button */
+		.collapsible-button {
+			background-color: #f0f0f0;
+			padding: 10px;
+			border: none;
+			text-align: left;
+			width: 100%;
+			cursor: cell;
+		}
+	
+		/* Style for the button when active (expanded) */
+		.active {
+			background-color: #ddd;
+		}
+		.toggle-button {
+			background-color: #f0f0f0;
+			padding: 10px;
+			border: none;
+			text-align: left;
+			width: 100%;
+			cursor: cell;
+		 }
+
+        .expanded-list {
+            display: none;
+        }
+
+        .expanded-list.show {
+            display: block;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+			font-family:calibri;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1  style="font-family:calibri;font-size:30px;" align="center">DCM Deployment Report for Sprint12</h1>
+<p style="font-family:calibri;font-size:15px;">Server Name:	<b>Platform_Sandbox </b> <br> 
+Repo Name:	<b>procter-gamble/plm-3dx</b><br> 
+Branch Name:<b>develop-dcm-june-2024</b></p>
+<table>
+    <tr>
+        <th>PR Number</th>
+        <th>PR Author</th>
+		<th>PR Title</th>
+        <th>PR Description</th>
+        <th>Files Changed</th>
+		<th>SonarQube Check</th>
+		<th>Merged At</th>
+        
+    </tr>
+</table>
+<script>
+    function toggleList(pr_number) {
+        var list = document.getElementById("expandable-list"+pr_number);
+        if (list.classList.contains("show")) {
+            list.classList.remove("show");
+           document.querySelector('.toggle-button').textContent = "Files";
+        } else {
+            list.classList.add("show");
+            document.querySelector('.toggle-button').textContent = "Files";
+        }
+    }
+	
+	function toggleCollapsible(pr_number) {
+		var content = document.getElementById("collapsibleContent"+pr_number);
+		var button = document.getElementById("prDesc_"+);
+
+		if (content.style.display === "block") {
+			content.style.display = "none";
+			button.classList.remove("active");
+		} else {
+			content.style.display = "block";
+			button.classList.add("active");
+		}
+}
+</script>
+</body>
+</html>
+<script>
+function togglefolder(foldername) {
+    var list = document.getElementById("expandable-list" + foldername);
+    var button = document.getElementById(foldername); 
+    if (list.classList.contains("show")) {
+        list.classList.remove("show");
+        button.textContent = foldername; 
+    } else {
+        list.classList.add("show");
+        button.textContent = "Hide " + foldername + " Files"; 
+    }
+}
+</script>
