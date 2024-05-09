@@ -1,9 +1,17 @@
 name: Generate and Deploy Report to github Pages
 
 on:
-  push:
-    branches:
-      - main  # adjust this to match your repository's main branch
+ workflow_dispatch:
+    inputs:
+      Branch:
+        description: 'Branch'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+        - main
+        - github-pages
+        
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
