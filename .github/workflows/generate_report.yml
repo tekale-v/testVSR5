@@ -1,7 +1,8 @@
 name: Generate and Deploy Report to github Pages
 
 on:
-  workflow_dispatch:
+
+  workflow_dispatch:  
   push:
     branches:
       - github-pages  # adjust this to match your repository's main branch
@@ -23,11 +24,11 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v2
       with:
-        #repository: tekale-v/testVSR5  # replace with the source repository
-        #ref: github-pages  # adjust branch name as needed
-        repository: mangesh-khaire/github-actions-pages
-        ref: main
-        token: ${{ secrets.PAGE_REPO_ACCESS }}
+        repository: tekale-v/testVSR5  # replace with the source repository
+        ref: github-pages  # adjust branch name as needed
+        #repository: mangesh-khaire/github-actions-pages
+        #ref: main
+        #token: ${{ secrets.PAGE_REPO_ACCESS }}
         
       # Add a new step to call the shell script for report generation
     - name: Generate Report
