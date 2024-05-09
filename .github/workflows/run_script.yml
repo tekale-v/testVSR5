@@ -23,7 +23,7 @@ jobs:
   
     - name: Run Script
       run: |
-        cd ./github-pages/
+        cd ./docs/
         node generate-report.js
         
     - name: Run Script
