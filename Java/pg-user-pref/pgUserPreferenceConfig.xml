@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<preferenceConfig>
+    <packagingPreferenceConfig
+            types="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgCustomerUnitPart,type_pgConsumerUnitPart,type_pgInnerPackUnitPart,type_pgOnlinePrintingPart,type_FinishedProductPart,type_pgTransportUnitPart,type_pgPromotionalItemPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart">
+        <partType allowedTypes="" show="true"/>
+        <phase allowedTypes="" show="true"/>
+        <mfgStatus allowedTypes="" show="true"/>
+        <structureReleaseCriteria
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgCustomerUnitPart,type_pgConsumerUnitPart,type_pgInnerPackUnitPart,type_pgOnlinePrintingPart,type_FinishedProductPart,type_pgPromotionalItemPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart"
+                show="true"/>
+        <classType
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgOnlinePrintingPart,type_pgPromotionalItemPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart"
+                show="true"/>
+        <reportedFunction
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgOnlinePrintingPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart"
+                show="true"/>
+        <segment allowedTypes="" show="true"/>
+        <componentType
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_pgOnlinePrintingPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart"
+                show="true"/>
+        <materialType
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart"
+                show="true"/>
+        <baseUoM
+                allowedTypes="type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgConsumerUnitPart,type_pgCustomerUnitPart,type_pgInnerPackUnitPart,type_pgOnlinePrintingPart,type_FinishedProductPart,type_pgPromotionalItemPart"
+                show="true"/>
+    </packagingPreferenceConfig>
+    <productPreferenceConfig
+            types="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgMasterProductPart,type_pgSoftwarePart,type_FormulationPart">
+        <partType allowedTypes="" show="true"/>
+        <phase allowedTypes="" show="true"/>
+        <mfgStatus allowedTypes="" show="true"/>
+        <structureReleaseCriteria
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgMasterProductPart,type_pgSoftwarePart,type_FormulationPart"
+                show="true"/>
+        <classType
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgSoftwarePart,type_FormulationPart"
+                show="true"/>
+        <reportedFunction
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgSoftwarePart,type_FormulationPart"
+                show="true"/>
+        <segment allowedTypes="" show="true"/>
+        <businessArea
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgSoftwarePart,type_FormulationPart"
+                show="true"/>
+        <productCategoryPlatform
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgSoftwarePart,type_FormulationPart"
+                show="true"/>
+        <productComplianceRequired
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_FormulationPart" show="true"/>
+    </productPreferenceConfig>
+    <rawMaterialPreferenceConfig types="type_pgAncillaryRawMaterialPart,type_RawMaterial,type_pgMasterRawMaterialPart">
+        <partType allowedTypes="" show="true"/>
+        <phase allowedTypes="" show="true"/>
+        <mfgStatus allowedTypes="" show="true"/>
+        <structureReleaseCriteria
+                allowedTypes="type_pgAncillaryRawMaterialPart,type_RawMaterial,type_pgMasterRawMaterialPart"
+                show="true"/>
+        <classType allowedTypes="type_pgAncillaryRawMaterialPart,type_RawMaterial" show="true"/>
+        <reportedFunction allowedTypes="type_pgAncillaryRawMaterialPart,type_RawMaterial" show="true"/>
+        <segment allowedTypes="" show="true"/>
+        <businessArea allowedTypes="type_RawMaterial" show="true"/>
+        <productCategoryPlatform allowedTypes="type_RawMaterial" show="true"/>
+        <materialFunction allowedTypes="type_RawMaterial" show="true"/>
+    </rawMaterialPreferenceConfig>
+    <technicalSpecPreferenceConfig
+            types="type_pgDSOAffectedFPPList,type_pgArtwork,type_pgAuthorizedConfigurationStandard,type_pgAuthorizedTemporarySpecification,type_pgIllustration,type_FormulaTechnicalSpecification,type_pgLaboratoryIndexSpecification,type_pgMakingInstructions,type_pgPackingInstructions,type_pgProcessStandard,type_pgQualitySpecification,type_pgRawMaterialPlantInstruction,type_pgStackingPattern,type_pgStandardOperatingProcedure,type_TestMethodSpecification,type_pgStructuredATS"/>
+    <copyPreferenceConfig>
+        <copyPackagingSearchTypes>
+            <includeSearchType>
+                type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgCustomerUnitPart,type_pgConsumerUnitPart,type_pgInnerPackUnitPart,type_pgOnlinePrintingPart,type_FinishedProductPart,type_pgTransportUnitPart,type_pgPromotionalItemPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart
+            </includeSearchType>
+            <excludeSearchType>
+                type_pgPackingMaterial,type_pgFinishedProduct,type_pgMasterPackingMaterial,type_pgMasterFinishedProduct,pgPackingSubassembly,type_pgConsumerDesignBasis
+            </excludeSearchType>
+        </copyPackagingSearchTypes>
+        <copyProductSearchTypes>
+            <includeSearchType>
+                type_pgAssembledProductPart,type_pgDeviceProductPart,type_pgIntermediateProductPart,type_pgMasterProductPart,type_pgSoftwarePart,type_FormulationProcess
+            </includeSearchType>
+            <excludeSearchType>type_VirtualIntermediate,type_pgFormulatedProduct,type_pgBaseFormula</excludeSearchType>
+        </copyProductSearchTypes>
+        <copyRawMaterialSearchTypes>
+            <includeSearchType>type_pgAncillaryRawMaterialPart,type_RawMaterial,type_pgMasterRawMaterialPart
+            </includeSearchType>
+            <excludeSearchType>type_pgRawMaterial,type_pgMasterRawMaterial</excludeSearchType>
+        </copyRawMaterialSearchTypes>
+        <copyTechnicalSpecSearchTypes>
+            <includeSearchType>
+                type_pgDSOAffectedFPPList,type_pgArtwork,type_pgAuthorizedConfigurationStandard,type_pgAuthorizedTemporarySpecification,type_pgIllustration,type_FormulaTechnicalSpecification,type_pgLaboratoryIndexSpecification,type_pgMakingInstructions,type_pgPackingInstructions,type_pgProcessStandard,type_pgQualitySpecification,type_pgRawMaterialPlantInstruction,type_pgStackingPattern,type_pgStandardOperatingProcedure,type_TestMethodSpecification
+            </includeSearchType>
+            <excludeSearchType>type_pgApprovedSupplierList</excludeSearchType>
+        </copyTechnicalSpecSearchTypes>
+    </copyPreferenceConfig>
+    <defaultCreatePartConfig>
+        <defaultEquivalentPart types="">
+            <defaultPlant allowedTypes="">
+                <defaultAuthorizedToUse name="attribute_pgIsAuthorizedtoUse">
+                    <defaultPlantAttribute value="" type=""/>
+                    <defaultPlantAttribute value="" type=""/>
+                </defaultAuthorizedToUse>
+                <defaultAuthorizedToProduce name="attribute_pgIsAuthorizedtoProduce">
+                    <defaultPlantAttribute value="" type=""/>
+                    <defaultPlantAttribute value="" type=""/>
+                </defaultAuthorizedToProduce>
+                <defaultAuthorizedToView name="attribute_pgIsAuthorizedtoView">
+                    <defaultPlantAttribute value="" type=""/>
+                    <defaultPlantAttribute value="" type=""/>
+                </defaultAuthorizedToView>
+                <defaultActivated name="attribute_pgIsActivated">
+                    <defaultPlantAttribute value="" type=""/>
+                    <defaultPlantAttribute value="" type=""/>
+                </defaultActivated>
+            </defaultPlant>
+            <defaultSharingMember allowedTypes="" allowedPolicies=""/>
+        </defaultEquivalentPart>
+        <defaultProductPart
+                types="type_pgAncillaryRawMaterialPart,type_pgAssembledProductPart,type_pgCompetitiveProductPart,type_pgAncillaryPackagingMaterialPart,type_pgConsumerUnitPart,type_pgCustomerUnitPart,type_pgDeviceProductPart,type_pgFabricatedPart,type_FinishedProductPart,type_pgInnerPackUnitPart,type_pgIntermediateProductPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterProductPart,type_pgMasterRawMaterialPart,type_pgOnlinePrintingPart,type_PackagingAssemblyPart,type_PackagingMaterialPart,type_pgPromotionalItemPart,type_RawMaterial,type_pgSoftwarePart,type_pgTransportUnitPart,type_FormulationPart">
+            <defaultPlant
+                    allowedTypes="type_PackagingAssemblyPart,type_PackagingMaterialPart,type_pgPromotionalItemPart,type_RawMaterial,type_pgAncillaryPackagingMaterialPart,type_pgAncillaryRawMaterialPart,type_pgAssembledProductPart,type_pgConsumerUnitPart,type_pgCustomerUnitPart,type_pgDeviceProductPart,type_pgFabricatedPart,type_FinishedProductPart,type_pgInnerPackUnitPart,type_pgIntermediateProductPart,type_pgOnlinePrintingPart,type_pgSoftwarePart,type_FormulationPart">
+                <defaultAuthorizedToUse name="attribute_pgIsAuthorizedtoUse">
+                    <defaultPlantAttribute value="TRUE" type="type_pgDeviceProductPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgAssembledProductPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgSoftwarePart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_FormulationPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_FinishedProductPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgIntermediateProductPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgFabricatedPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_PackagingAssemblyPart"/>
+                </defaultAuthorizedToUse>
+                <defaultAuthorizedToProduce name="attribute_pgIsAuthorizedtoProduce">
+                    <defaultPlantAttribute value="FALSE" type="type_pgAssembledProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgDeviceProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgFabricatedPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_FinishedProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgIntermediateProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_PackagingAssemblyPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgSoftwarePart"/>
+                </defaultAuthorizedToProduce>
+                <defaultAuthorizedToView name="attribute_pgIsAuthorizedtoView">
+                    <defaultPlantAttribute value="TRUE" type="type_pgAncillaryPackagingMaterialPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgAncillaryRawMaterialPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_ConsumerUnitPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgCustomerUnitPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgInnerPackUnitPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgOnlinePrintingPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_PackagingMaterialPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgPromotionalItemPart"/>
+                    <defaultPlantAttribute value="TRUE" type="type_RawMaterial"/>
+                </defaultAuthorizedToView>
+                <defaultActivated name="attribute_pgIsActivated">
+                    <defaultPlantAttribute value="FALSE" type="type_pgAssembledProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgDeviceProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgFabricatedPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgIntermediateProductPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_PackagingAssemblyPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_PackagingMaterialPart"/>
+                    <defaultPlantAttribute value="FALSE" type="type_RawMaterial"/>
+                    <defaultPlantAttribute value="FALSE" type="type_pgSoftwarePart"/>
+                </defaultActivated>
+            </defaultPlant>
+            <defaultSharingMember
+                    allowedTypes="type_pgAncillaryPackagingMaterialPart,type_pgAncillaryRawMaterialPart,type_pgAssembledProductPart,type_pgCompetitiveProductPart,type_pgConsumerUnitPart,type_pgCustomerUnitPart,type_pgDeviceProductPart,type_pgFabricatedPart,type_FinishedProductPart,type_pgInnerPackUnitPart,type_pgIntermediateProductPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterProductPart,type_pgMasterRawMaterialPart,type_pgOnlinePrintingPart,type_PackagingAssemblyPart,type_PackagingMaterialPart,type_pgPromotionalItemPart,type_RawMaterial,type_pgSoftwarePart,type_pgTransportUnitPart,type_CosmeticFormulation"
+                    allowedPolicies=""/>
+        </defaultProductPart>
+        <defaultTechnicalSpecPart types="">
+            <defaultPlant
+                    allowedTypes="type_pgAuthorizedConfigurationStandard,type_pgAuthorizedTemporarySpecification,type_FormulaTechnicalSpecification,type_pgLaboratoryIndexSpecification,type_pgMakingInstructions,type_pgProcessStandard,type_pgStandardOperatingProcedure">
+                <defaultAuthorizedToUse name="attribute_pgIsAuthorizedtoUse">
+                    <defaultPlantAttribute value="TRUE" type="type_pgAuthorizedConfigurationStandard"/>
+                    <defaultPlantAttribute value="TRUE" type="type_FormulaTechnicalSpecification"/>
+                </defaultAuthorizedToUse>
+                <defaultAuthorizedToProduce name="attribute_pgIsAuthorizedtoProduce">
+                    <defaultPlantAttribute value="FALSE" type="type_pgAuthorizedConfigurationStandard"/>
+                    <defaultPlantAttribute value="FALSE" type="type_FormulaTechnicalSpecification"/>
+                </defaultAuthorizedToProduce>
+                <defaultAuthorizedToView name="attribute_pgIsAuthorizedtoView">
+                    <defaultPlantAttribute value="TRUE" type="type_pgAuthorizedConfigurationStandard"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgLaboratoryIndexSpecification"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgMakingInstructions"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgProcessStandard"/>
+                    <defaultPlantAttribute value="TRUE" type="type_pgStandardOperatingProcedure"/>
+                </defaultAuthorizedToView>
+                <defaultActivated name="attribute_pgIsActivated">
+                </defaultActivated>
+            </defaultPlant>
+            <defaultSharingMember
+                    allowedTypes="type_pgDSOAffectedFPPList,type_pgArtwork,type_pgAuthorizedConfigurationStandard,type_pgAuthorizedTemporarySpecification,type_pgIllustration,type_FormulaTechnicalSpecification,type_pgLaboratoryIndexSpecification,type_pgMakingInstructions,type_pgPackingInstructions,type_pgProcessStandard,type_pgQualitySpecification,type_pgRawMaterialPlantInstruction,type_pgStackingPattern,type_pgStandardOperatingProcedure,type_TestMethodSpecification"
+                    allowedPolicies="policy_IPMSpecification,policy_pgDSOAffectedFPPList"/>
+        </defaultTechnicalSpecPart>
+    </defaultCreatePartConfig>
+    <defaultCreateChangeAction types="type_ChangeAction">
+        <defaultSharingMember allowedTypes="type_ChangeAction"/>
+    </defaultCreateChangeAction>
+    <defaultCreatePartFamily types="">
+        <defaultSharingMember allowedTypes=""/>
+    </defaultCreatePartFamily>
+    <irmAttributePreferenceConfig types="">
+        <irmTitle show="true"/>
+        <irmDescription show="true"/>
+        <irmPolicy show="true"/>
+        <irmClassification show="true"/>
+        <irmSecurityCategory show="true"/>
+        <irmRegion show="true"/>
+        <irmSharingMember show="true"/>
+        <businessArea allowedTypes="" show="true"/>
+    </irmAttributePreferenceConfig>
+    <irmProjectSpacePreferenceConfig types="">
+        <businessArea allowedTypes="" show="true"/>
+    </irmProjectSpacePreferenceConfig>
+    <ipSecurityControlPreference>
+        <businessUseClass
+                allowedTypes="type_pgSoftwarePart,type_pgAncillaryPackagingMaterialPart,type_PackagingMaterialPart,type_PackagingAssemblyPart,type_pgFabricatedPart,type_pgCustomerUnitPart,type_pgConsumerUnitPart,type_pgInnerPackUnitPart,type_pgOnlinePrintingPart,type_FinishedProductPart,type_pgTransportUnitPart,type_pgPromotionalItemPart,type_pgMasterPackagingAssemblyPart,type_pgMasterPackagingMaterialPart,type_pgMasterConsumerUnitPart,type_pgMasterCustomerUnitPart,type_pgMasterInnerPackUnitPart,type_pgAncillaryRawMaterialPart,type_RawMaterial,type_pgMasterRawMaterialPart,type_pgDSOAffectedFPPList,type_pgArtwork,type_pgAuthorizedTemporarySpecification,type_pgIllustration,type_pgLaboratoryIndexSpecification,type_pgPackingInstructions,type_pgProcessStandard,type_pgQualitySpecification,type_pgRawMaterialPlantInstruction,type_pgStackingPattern,type_pgStandardOperatingProcedure,type_TestMethodSpecification"
+                show="true"/>
+        <highlyRestrictedClass
+                allowedTypes="type_pgAssembledProductPart,type_pgDeviceProductPart,type_CosmeticFormulation,type_pgIntermediateProductPart,type_pgMasterProductPart,type_pgAuthorizedConfigurationStandard,type_pgMakingInstructions,type_FormulaTechnicalSpecification"
+                show="true"/>
+        <primaryOrg allowedTypes="" show="true"/>
+    </ipSecurityControlPreference>
+</preferenceConfig>
