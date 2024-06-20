@@ -17,6 +17,15 @@ jobs:
       - name: Generate Javadoc
         run: javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com 
 
+      - name: Check for changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Changes detected, proceeding to commit."
+          else
+            echo "No changes detected, skipping commit."
+            exit 0
+          fi
+
       - name: Commit Javadoc
         run: |
           git config --local user.name "tekale-v"
@@ -24,3 +33,4 @@ jobs:
           git add Documentation
           git commit -m "Update Javadoc"
           git push
+        if: ${{ steps.check_for_changes.outputs.changed == 'true' }}
