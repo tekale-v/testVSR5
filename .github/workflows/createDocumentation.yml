@@ -6,6 +6,9 @@ on:
 jobs:
   generate-javadoc:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -19,7 +22,11 @@ jobs:
           ls -R Documentation
         continue-on-error: true
         
-        
+       - name: Verify Javadoc Generation
+        run: |
+          echo "Listing contents of Documentation directory:"
+          ls -R Documentation
+ 
       - name: Push changes
         if: success()  # Only push changes if Javadoc generation was successful
         run: |
