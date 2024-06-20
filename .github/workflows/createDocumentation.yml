@@ -22,7 +22,7 @@ jobs:
           ls -R Documentation
         continue-on-error: true
         
-       - name: Verify Javadoc Generation
+      - name: Verify Javadoc Generation
         run: |
           echo "Listing contents of Documentation directory:"
           ls -R Documentation
