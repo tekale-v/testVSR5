@@ -27,7 +27,7 @@ jobs:
           ls -R Documentation
  
       - name: Push changes
-        if: success()  # Only push changes if Javadoc generation was successful
+        if: success()
         run: |
           git config user.name "tekale-v"
           git config user.email "81675926+tekale-v@users.noreply.github.com"
