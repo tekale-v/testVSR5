@@ -20,6 +20,7 @@ jobs:
           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com
           echo "Javadoc generation completed."
           ls -R Documentation
+        continue-on-error: true
 
       - name: Verify Javadoc Generation
         run: |
