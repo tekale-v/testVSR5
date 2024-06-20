@@ -17,7 +17,9 @@ jobs:
           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com
           echo "Javadoc generation completed."
           ls -R Documentation
-
+        continue-on-error: true
+        
+        
       - name: Push changes
         if: success()  # Only push changes if Javadoc generation was successful
         run: |
