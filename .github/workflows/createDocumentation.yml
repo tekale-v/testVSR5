@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Javadoc
-        run: javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com  -classpath "C:/Users/HCK1/IdeaProjects/FD07/jars/*"
+        run: javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com 
 
       - name: Commit Javadoc
         run: |
