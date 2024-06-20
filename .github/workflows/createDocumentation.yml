@@ -1,14 +1,11 @@
-name: Generate Javadoc
+name: Generate and Push Javadoc
 
 on:
   workflow_dispatch:
 
 jobs:
   generate-javadoc:
-    runs-on: actions-runner
-    
-    permissions:
-      contents: write
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -20,17 +17,12 @@ jobs:
           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com
           echo "Javadoc generation completed."
           ls -R Documentation
-        continue-on-error: true
 
-      - name: Verify Javadoc Generation
+      - name: Push changes
+        if: success()  # Only push changes if Javadoc generation was successful
         run: |
-          echo "Listing contents of Documentation directory:"
-          ls -R Documentation
-
-     - name: Push changes
-        run: |
-           git config user.name "tekale-v"
-           git config user.email "81675926+tekale-v@users.noreply.github.com"
-           git add Documentation
-           git commit -m "Update Javadoc"
-           git push 
+          git config user.name "tekale-v"
+          git config user.email "81675926+tekale-v@users.noreply.github.com"
+          git add Documentation
+          git commit -m "Update Javadoc"
+          git push
