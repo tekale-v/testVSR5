@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Javadoc
+        shell: bash
         run: |
           mkdir -p Documentation
           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com
