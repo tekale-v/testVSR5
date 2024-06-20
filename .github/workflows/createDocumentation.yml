@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate-javadoc:
-    runs-on: ubuntu-latest
+    runs-on: actions-runner
     
     permissions:
       contents: write
@@ -19,7 +19,6 @@ jobs:
           mkdir -p Documentation
           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com
           echo "Javadoc generation completed."
-          ls -R Documentation
         continue-on-error: true
         
       - name: Verify Javadoc Generation
@@ -33,5 +32,5 @@ jobs:
           git config user.name "tekale-v"
           git config user.email "81675926+tekale-v@users.noreply.github.com"
           git add Documentation
-          git commit -m "Update Javadoc"
+          git commit -m "Update Javadoc[skip ci]"
           git push
