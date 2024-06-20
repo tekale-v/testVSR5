@@ -6,6 +6,9 @@ on:
 jobs:
   generate-javadoc:
     runs-on: actions-runner
+    
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
