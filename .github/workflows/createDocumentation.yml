@@ -14,10 +14,10 @@ jobs:
       - name: Generate Javadoc
         run: javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com 
 
-      - name: Commit Javadoc
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add Documentation
-          git commit -m "Update Javadoc"
-          git push
+      - name: Push changes
+      run: |
+        git config user.name "tekale-v"
+        git config user.email "81675926+tekale-v@users.noreply.github.com"
+        git add .
+        git commit -m "Update report [skip ci]"
+        git push
