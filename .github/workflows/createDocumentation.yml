@@ -23,7 +23,7 @@ jobs:
       - name: Generate Javadoc
         run: |
           mkdir -p Documentation
-           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com -classpath "C:\Users\HCK1\IdeaProjects\FD07\jars/*"
+           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com 
           echo "Javadoc generation completed."
         continue-on-error: true
         
