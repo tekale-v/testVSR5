@@ -19,12 +19,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
         
       - name: Generate Javadoc
         run: |
           mkdir -p Documentation
-           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com -classpath "D:\eclipse\lib\*;D:\eclipse\lib\docs\java\*;D:\eclipse\lib\docs\javacommon\*;D:\eclipse\lib\docs\javaserver\*"
+          javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com -classpath "D:\eclipse\lib\*;D:\eclipse\lib\docs\java\*;D:\eclipse\lib\docs\javacommon\*;D:\eclipse\lib\docs\javaserver\*"
           echo "Javadoc generation completed."
         continue-on-error: true
         
@@ -34,7 +33,7 @@ jobs:
           ls -R Documentation
  
       - name: Push changes
-        if: success()  
+        if: success()
         run: |
           git config user.name "tekale-v"
           git config user.email "81675926+tekale-v@users.noreply.github.com"
