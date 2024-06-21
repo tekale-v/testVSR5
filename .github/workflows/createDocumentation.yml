@@ -17,7 +17,7 @@ jobs:
       - name: Generate Javadoc
         run: |
           mkdir -p Documentation
-           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com 
+           javadoc -d Documentation -sourcepath Java/pgWidgets -subpackages com -classpath "D:\eclipse\lib\*"
           echo "Javadoc generation completed."
         continue-on-error: true
         
