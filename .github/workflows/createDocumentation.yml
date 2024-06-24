@@ -1,4 +1,4 @@
-name: Generate and Push Javadoc
+name: Generate and Deploy Javadoc
 
 on:
   workflow_dispatch:
@@ -18,10 +18,11 @@ on:
 
 jobs:
   generate-javadoc:
-    runs-on: JavaDoc
+    runs-on: ubuntu-latest
     
     permissions:
-      contents: write
+      pages: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -45,11 +46,8 @@ jobs:
           echo "Listing contents of ${{ github.event.inputs.output-directory }} directory:"
           ls -R ${{ github.event.inputs.output-directory }}
 
-      - name: Push changes
-        if: success()
-        run: |
-          git config user.name "tekale-v"
-          git config user.email "81675926+tekale-v@users.noreply.github.com"
-          git add ${{ github.event.inputs.output-directory }}
-          git commit -m "Update Javadoc"
-          git push
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ github.event.inputs.output-directory }}
