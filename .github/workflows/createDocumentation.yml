@@ -14,11 +14,11 @@ on:
       class-path:
         description: 'Classpath for Javadoc'
         required: true
-        default: 'D:\eclipse\lib\*;D:\eclipse\lib\docs\java\*;D:\eclipse\lib\docs\javacommon\*;D:\eclipse\lib\docs\javaserver\*'
+        default: 'D:\\eclipse\\lib\\*;D:\\eclipse\\lib\\docs\\java\\*;D:\\eclipse\\lib\\docs\\javacommon\\*;D:\\eclipse\\lib\\docs\\javaserver\\*'
 
 jobs:
   generate-javadoc:
-    runs-on: ubuntu-latest
+    runs-on: JavaDoc
     
     permissions:
       pages: write
