@@ -18,7 +18,7 @@ on:
 
 jobs:
   generate-javadoc:
-    runs-on: ubuntu-latest
+    runs-on: JavaDoc
     
     permissions:
       contents: write
