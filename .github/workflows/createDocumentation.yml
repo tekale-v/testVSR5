@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate-javadoc:
-    runs-on: actions-runner
+    runs-on: JavaDoc
     
     permissions:
       contents: write
