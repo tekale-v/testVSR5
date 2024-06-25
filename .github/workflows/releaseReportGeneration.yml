@@ -1,0 +1,123 @@
+name: Generate Release Report for Modules
+ 
+on: 
+  workflow_dispatch:
+    inputs:
+      ModuleName:
+        description: 'Module'
+        required: true
+        default: 'Spec Advisor'
+        type: choice
+        options:
+          - DCM
+          - Spec Advisor
+          - FIS
+    
+      BaseBranch:
+        description: 'Base Branch(Target)'
+        required: true
+        default: ''
+        type: choice
+        options:
+          - master
+          - develop-dcm-june-2024
+          - develop-sit
+
+      HeadBranch:
+        description: 'Head Branch(Source)'
+        required: true
+        default: ''
+        type: choice
+        options:
+          - release-SpecAdvisor-3DX-24-A10
+          - release-2022x-06
+          - develop-dcm-june-2024
+          -   
+          
+      RepoName:
+        decsription: 'Repo Name'
+        required : true
+        default: 'procter-gamble/plm-3dx'
+        
+      Keywords:
+        decsription: 'Keywords'
+        required : true
+        default: 'Claim,DCM'
+      
+      DirectoryPath:
+        decsription: 'Directory Path'
+        required : true
+        default: 'E:\GitHub\plm_3dx\Schema\June2024\DevSchema\Spinner\Business'
+        
+      ConsiderFiles:
+        decsription: 'Consider Files'
+        required : true
+        default: 'SpinnerAttributeData.xls,SpinnerInterfaceData.xls,SpinnerTriggerData.xls'
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  GenerateReport:
+    runs-on: actions-runner
+    # Define permissions for the job
+    permissions: write-all
+    steps:
+    - name: Checking out code
+      uses: actions/checkout@v2
+      with:
+        repository: procter-gamble/smaRepo
+        ref: main
+        token: ${{ secrets.PLM3DXSMATOKEN }}
+        path: _platform
+    
+    - run: |
+        echo "Inputs"
+        echo "${{ github.event.inputs.ModuleName }}"
+        echo "${{ github.event.inputs.BaseBranch }}"
+        echo "${{ github.event.inputs.HeadBranch }}"
+        echo "${{ github.event.inputs.RepoName }}"
+        echo "${{ github.event.inputs.Keywords }}"
+        echo "${{ github.event.inputs.DirectoryPath }}"
+        echo "${{ github.event.inputs.ConsiderFiles }}"
+        
+   
+    - name: Set Input Value
+      run: |
+           gh variable list
+           gh variable set ModuleName --body "${{ github.event.inputs.ModuleName }}"
+           gh variable set BaseBranch --body "${{ github.event.inputs.BaseBranch }}"
+           gh variable set HeadBranch --body "${{ github.event.inputs.HeadBranch }}"
+           gh variable set RepoName --body "${{ github.event.inputs.RepoName }}"
+           gh variable set Keywords --body "${{ github.event.inputs.Keywords }}"
+           gh variable set DirectoryPath --body "${{ github.event.inputs.DirectoryPath }}"
+           gh variable set ConsiderFiles --body "${{ github.event.inputs.ConsiderFiles }}"
+           gh variable list
+           echo "ModuleName=${{ github.event.inputs.ModuleName }}" >> $GITHUB_ENV
+           echo "BaseBranch=${{ github.event.inputs.BaseBranch }}" >> $GITHUB_ENV
+           echo "HeadBranch=${{ github.event.inputs.HeadBranch }}" >> $GITHUB_ENV
+           echo "RepoName=${{ github.event.inputs.RepoName }}" >> $GITHUB_ENV
+           echo "Keywords=${{ github.event.inputs.RepoName }}" >> $GITHUB_ENV
+           echo "DirectoryPath=${{ github.event.inputs.RepoName }}" >> $GITHUB_ENV
+           echo "ConsiderFiles=${{ github.event.inputs.RepoName }}" >> $GITHUB_ENV
+           
+    - name: ReportGeneration
+      run: | 
+        pwd
+        chmod 755 BuildFiles/ReportGeneration/ImpactAnalysis/AgileReleaseReportGeneration.sh
+        cd BuildFiles/ReportGeneration
+        ./AgileReleaseReportGeneration.sh "${{ github.event.inputs.RepoName }}"
+      env:
+        ModuleName: ${{ github.event.inputs.ModuleName }}
+        BaseBranch: ${{ github.event.inputs.BaseBranch }}
+        HeadBranch: ${{ github.event.inputs.HeadBranch }}
+        RepoName: ${{ github.event.inputs.RepoName }}
+        Keywords: ${{ github.event.inputs.Keywords }}
+        DirectoryPath: ${{ github.event.inputs.DirectoryPath }}
+        ConsiderFiles: ${{ github.event.inputs.ConsiderFiles }}
+    
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "tekale-v"
+        git config --global user.email "actions@users.noreply.github.com"
+        git add .
+        git status --porcelain | grep . && git commit -m "Update Release report to website" || echo "Nothing to commit"
+        git push        

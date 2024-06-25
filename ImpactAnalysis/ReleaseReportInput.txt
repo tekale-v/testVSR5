@@ -1,0 +1,6 @@
+from_email=plmadmin.im@pg.com
+DCMKeywords=Claim,DCM
+DirectoryPath=E:\GitHub\plm_3dx\Schema\June2024\DevSchema\Spinner\Business
+considerFiles=SpinnerAttributeData.xls,SpinnerInterfaceData.xls,SpinnerTriggerData.xls
+SendMailTo=hck1@3ds.com
+SendMailCC=vsr5@3ds.com
